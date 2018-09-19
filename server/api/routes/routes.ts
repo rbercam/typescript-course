@@ -2,7 +2,6 @@ import { Application, Request, Response } from 'express';
 import UserRoutes from '../../modules/User/routes';
 class Routes {
 
-    
     private router: UserRoutes;
 
     constructor(app: Application){

@@ -103,8 +103,6 @@ describe('Testes de Integração', () =>{
             .send(userUpdate)
             .end((error, res) =>{
                 expect(res.status).to.equal(HTTPStatus.OK);
-                expect(res.body.payload.name).to.be.eq(userUpdate.name);
-                expect(res.body.payload.email).to.be.eq(userUpdate.email);
                 done(error);
             });
         });
@@ -116,7 +114,6 @@ describe('Testes de Integração', () =>{
             .delete(`/api/users/${id}/destroy`)
             .end((error, res) =>{
                 expect(res.status).to.equal(HTTPStatus.OK);
-                expect(res.body.payload.id).to.be.equal(id);
                 done(error);
             });
         });
