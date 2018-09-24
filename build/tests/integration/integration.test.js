@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var jwt = require("jwt-simple");
 var HTTPStatus = require("http-status");
 var helpers_1 = require("./config/helpers");
 describe('Testes de Integração', function () {
@@ -7,6 +8,7 @@ describe('Testes de Integração', function () {
     var config = require('../../server/config/env/config');
     var model = require('../../server/models');
     var id;
+    var token;
     var userTest = {
         id: 100,
         name: 'Usuário Teste',
@@ -15,9 +17,9 @@ describe('Testes de Integração', function () {
     };
     var userDefault = {
         id: 1,
-        name: 'Default User',
-        email: 'default@email.com',
-        password: 'default'
+        name: 'Rafael',
+        email: 'rafaelt@email.com',
+        password: '123'
     };
     beforeEach(function (done) {
         model.User.destroy({
@@ -29,6 +31,7 @@ describe('Testes de Integração', function () {
             .then(function (user) {
             model.User.create(userTest)
                 .then(function () {
+                token = jwt.encode({ id: user.id }, config.secret);
                 done();
             });
         }); //limpa a base para realizar um teste
